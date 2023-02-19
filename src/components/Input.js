@@ -16,8 +16,9 @@ class Input {
         label.classList.add('label');
         label.innerText = this.name;
         console.log(label)
-
-        div.append(label, this.element);
+        console.log(this.element)
+        return div.append(label, this.element);
+        
     }
 }
 
@@ -25,6 +26,7 @@ const emailInput = new Input({
     name: 'Email',
     type: 'email',
 })
+
 
 const passwordInput = new Input({
     name: 'Password',

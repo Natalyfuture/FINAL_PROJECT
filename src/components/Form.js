@@ -31,12 +31,16 @@ class Form {
             const formValues = getFormValue(this.inputs);
             onSubmit({formValues}, e)
         })
+
+        
         this.inputs.forEach((input) =>{
             input.render(this.form);
+            console.log(input)
         })
-        this.form.append(submitBtn)
+       this.form.render();
     }
     render(container){
+        this.form.append(register, login, this.inputs,submitBtn)
         container.append(this.form)
     }
 }
@@ -52,4 +56,6 @@ const formLogin = new Form({
 });
 
 formLogin.render(document.body);
+console.log(formLogin)
+
 export{formRegister,  formLogin}
