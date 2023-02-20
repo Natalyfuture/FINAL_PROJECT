@@ -1,10 +1,12 @@
-import{emailInput, passwordInput, nameInput} from './Input.js';
+import{emailInput, passwordInput, nameInput} from './Input';
+
 
 class Form {
     constructor (options){
         const{inputs, onSubmit} = options;
 
         this.inputs = inputs;
+        console.log(this.inputs)
 
         this.form = document.createElement('form')
         const register = document.createElement('h3');
@@ -32,16 +34,21 @@ class Form {
             onSubmit({formValues}, e)
         })
 
-        
+        this.form.append(register, login);
+
         this.inputs.forEach((input) =>{
-            input.render(this.form);
             console.log(input)
+            this.form.append(input);
+            console.log(this.form)
         })
-       this.form.render();
+       
+       this.form.append(submitBtn);
+       console.log(this.form)
     }
     render(container){
-        this.form.append(register, login, this.inputs,submitBtn)
+        
         container.append(this.form)
+        console.log(container)
     }
 }
 
