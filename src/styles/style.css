@@ -1,3 +1,18 @@
-h1 {
+h3 {
     color: red;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.input_label{
+    position: absolute;
+    color: #6c6c6c;
+    top: -10px;
+    left: 20px;
+    background: #fff;
+    padding: 0 5px;
 }

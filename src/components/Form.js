@@ -1,5 +1,5 @@
 import{emailInput, passwordInput, nameInput} from './Input';
-
+console.log(emailInput.div)
 
 class Form {
     constructor (options){
@@ -37,8 +37,8 @@ class Form {
         this.form.append(register, login);
 
         this.inputs.forEach((input) =>{
-            console.log(input)
-            this.form.append(input);
+            console.log(input.div)
+            this.form.append(input.div)
             console.log(this.form)
         })
        
