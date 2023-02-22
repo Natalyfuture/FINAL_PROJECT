@@ -4,6 +4,8 @@ import './styles/style.css';
 console.log('hello world!!!', 30); */
 
 import {emailInput, passwordInput, nameInput} from './components/Input';
-import{formRegister,  formLogin} from './components/Form.js';
+import{formRegister/* ,  formLogin */} from './components/Form.js';
+import './styles/style.css';
 
-console.log(formRegister);
+console.log(formRegister)
+

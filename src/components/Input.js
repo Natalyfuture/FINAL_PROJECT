@@ -14,13 +14,17 @@ class Input {
     }
     render(){
         const div = document.createElement('div');
+        const span = document.createElement('span');
         const label = document.createElement('label');
+
         div.classList.add('input-container');
+        span.classList.add('input-error')
         label.classList.add('input_label');
+
         label.innerText = this.name;
-        console.log(label)
+        span.innerText = 'ERROR'
         console.log(this.element)
-        div.append(label, this.element);
+        div.append(label, this.element, span);
         console.log(div)
         return div
         

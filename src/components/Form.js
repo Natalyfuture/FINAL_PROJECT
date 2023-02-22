@@ -1,24 +1,29 @@
 import{emailInput, passwordInput, nameInput} from './Input';
-console.log(emailInput.div)
+
+const authForm = document.getElementById('auth-form');
 
 class Form {
     constructor (options){
-        const{inputs, onSubmit} = options;
+        const{inputs, onSubmit, text} = options;
 
         this.inputs = inputs;
-        console.log(this.inputs)
+        this.text = text;
 
         this.form = document.createElement('form')
-        const register = document.createElement('h3');
-        const login = document.createElement('h3');
+        const registerBtn = document.createElement('button');
         const submitBtn = document.createElement('button');
+        const registerText = document.createElement('h3')
 
+        this.form.classList.add('form')
         submitBtn.type = 'submit';
-        register.classList.add('text');
-        login.classList.add('text');
+        submitBtn.classList.add('button');
+        submitBtn.classList.add('button_submit');
+        registerBtn.classList.add('button');
+        registerBtn.classList.add('button_text');
+        registerText.classList.add('text-registration')
 
-        register.innerText = 'REGISTER';
-        login.innerText = 'LOGIN';
+        registerText.innerText = 'REGISTER';
+        registerBtn.innerText = 'LOGIN';
         submitBtn.innerText = 'Submit';
 
         function getFormValue (inputs) {
@@ -34,7 +39,9 @@ class Form {
             onSubmit({formValues}, e)
         })
 
-        this.form.append(register, login);
+       
+
+        this.form.append();
 
         this.inputs.forEach((input) =>{
             console.log(input.div)
@@ -42,8 +49,9 @@ class Form {
             console.log(this.form)
         })
        
-       this.form.append(submitBtn);
-       console.log(this.form)
+        authForm.append(registerText, registerBtn, this.form, submitBtn)
+       /* this.form.append(submitBtn);
+       console.log(this.form) */
     }
     render(container){
         
@@ -55,7 +63,7 @@ class Form {
 const formRegister = new Form({
     inputs: [emailInput, nameInput, passwordInput],
 });
-formRegister.render(document.body);
+/* formRegister.render(document.body);
 
 const formLogin = new Form({
     inputs: [emailInput, passwordInput],
@@ -64,5 +72,5 @@ const formLogin = new Form({
 
 formLogin.render(document.body);
 console.log(formLogin)
-
-export{formRegister,  formLogin}
+ */
+export{formRegister/* ,  formLogin */}
