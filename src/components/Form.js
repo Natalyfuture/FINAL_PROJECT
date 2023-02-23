@@ -1,13 +1,13 @@
-import{emailInput, passwordInput, nameInput} from './Input';
-
 const authForm = document.getElementById('auth-form');
 
-class Form {
+export class Form {
     constructor (options){
-        const{inputs, onSubmit, text} = options;
+        const{inputs, onSubmit, changeBtnText, title} = options;
 
         this.inputs = inputs;
-        this.text = text;
+        this.title = title;
+        this.changeBtnText = changeBtnText;
+        
 
         this.form = document.createElement('form')
         const registerBtn = document.createElement('button');
@@ -16,61 +16,49 @@ class Form {
 
         this.form.classList.add('form')
         submitBtn.type = 'submit';
-        submitBtn.classList.add('button');
-        submitBtn.classList.add('button_submit');
-        registerBtn.classList.add('button');
-        registerBtn.classList.add('button_text');
-        registerText.classList.add('text-registration')
+        submitBtn.classList.add('button', 'button_submit');
+        registerBtn.classList.add('button', 'button_text');
+        registerText.classList.add('text-registration');
 
-        registerText.innerText = 'REGISTER';
-        registerBtn.innerText = 'LOGIN';
+        registerText.innerText = title;
+        registerBtn.innerText = changeBtnText;
         submitBtn.innerText = 'Submit';
 
         function getFormValue (inputs) {
             return inputs.reduce((values, input) =>{
                 values[input.name] = input.value;
+                console.log(input.name)
+                console.log(input.value)
                 return values;
             }, {}); 
         }
 
-        this.form.addEventListener('submit', (e) =>{
+        this.form.addEventListener('submit', async (e) =>{
             e.preventDefault();
             const formValues = getFormValue(this.inputs);
+            console.log(formValues)
+            submitBtn.setAttribute('disabled', '');
+            await onSubmit(this.formValues, e)
+            submitBtn.removeAttribute('disabled');
             onSubmit({formValues}, e)
         })
 
-       
-
-        this.form.append();
+        this.form.append(registerText, registerBtn);
 
         this.inputs.forEach((input) =>{
-            console.log(input.div)
-            this.form.append(input.div)
+            console.log(input.control)
+            this.form.append(input.control)
             console.log(this.form)
         })
+
+        this.form.append(submitBtn);
        
-        authForm.append(registerText, registerBtn, this.form, submitBtn)
-       /* this.form.append(submitBtn);
-       console.log(this.form) */
     }
-    render(container){
-        
+
+    render(container) {
         container.append(this.form)
-        console.log(container)
     }
+   
 }
 
-const formRegister = new Form({
-    inputs: [emailInput, nameInput, passwordInput],
-});
-/* formRegister.render(document.body);
 
-const formLogin = new Form({
-    inputs: [emailInput, passwordInput],
-    
-});
-
-formLogin.render(document.body);
-console.log(formLogin)
- */
-export{formRegister/* ,  formLogin */}

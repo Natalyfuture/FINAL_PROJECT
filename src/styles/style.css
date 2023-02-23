@@ -5,7 +5,7 @@
 
 .container{
     margin: 0auto;
-    min-width: 1170px;
+    max-width: 1170px;
     padding: 0 15px;
 }
 .header{
@@ -20,8 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid gray;
-    box-shadow: 1px 1px 3px;
+    
 }
 
 .logo{
@@ -45,8 +44,8 @@ line-height: 36px;
 
 }
 
-#app{
-    motion: 0 auto;
+.text-registration{
+    margin-bottom: 10px;
 }
 
 .auth-form{
@@ -57,20 +56,23 @@ line-height: 36px;
     border-radius: 8px;
     padding: 40px;
     position: relative;
-    margin: 20px;
+    margin-top: 100px;
 }
 
 .form{
     display: flex;
     flex-direction: column;
-    
+    margin-top: 20px;
+}
 
+.input_label{
+    color: #3d62d3;
 }
 
 .button{
     width: 200px;
     border: none;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     cursor: pointer;
     background-color: transparent;
     text-align: left;
@@ -82,21 +84,21 @@ line-height: 36px;
     padding: 0;
 }
 
-.button_text:hover{
+.button_text:hover, .text-registration:hover{
     color: #3d62d3;
     text-decoration: underline;
 }
 
 .button_submit{
     width: 100px;
-    height: 25px;
+    height: 30px;
     border-radius: 5px;
     background-color: #7e90c7;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     position: absolute;
     right: 60px;
-    bottom: 10px; 
+    bottom: 5px; 
     
 }
 
@@ -105,29 +107,36 @@ line-height: 36px;
     border-radius: 5px;
     border: 1px solid;
     background-color: rgb(242, 242, 253);
+    margin-bottom: 25px;
 }
 
 .input-container{
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 20px;
+    margin-bottom: 20px;
 }
+
+.input-container:last-of-type{
+    margin-bottom: 42px;
+}
+
 
 .input_label{
     position: absolute;
-    color: #6c6c6c;
+    color: black;
     top: -20px;
-    left: 20px;
+    left: 5 px;
     background: #fff;
     padding: 0 5px;
 }
 
 .input-error{
     position: absolute;
-    bottom: -16px;
-    left: 0;
+    bottom: 10px;
+    left: 5px;
     color: red;
     font-size: 14px;
+    
 
 }
