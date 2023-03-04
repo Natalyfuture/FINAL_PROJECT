@@ -1,27 +1,27 @@
 export class Input {
     constructor (options){
-        const{name, placeholder, type, onInput, onChange} = options;
+        const{name, label, placeholder, type, onInput, onChange} = options;
 
         this.element = document.createElement('input');
         this.errorMessage = document.createElement('span');
 
         this.value = this.element.value;
         this.name = name;
+        this.label = label;
         this.element.name = name;
         this.element.type = type;
         this.element.placeholder = placeholder;
+        this.element.label = label;
 
         this.value = this.element.value;
-        console.log(this.value)
 
         this.control = this.createControl(onInput, onChange);
-        console.log(this.control)
 
         }
 
         createControl(onInput, onChange){
             const div = document.createElement('div');
-            const label = document.createElement('label');
+            const labelInput = document.createElement('label');
             const inputId = `_${this.name}`;
 
             div.classList.add('input-container');
@@ -29,16 +29,15 @@ export class Input {
             this.element.classList.add('input_name');
 
             this.element.id = inputId;
-            console.log(this.element.id)
 
-            label.setAttribute('for', this.element.id);
-            label.innerText = this.name;
+            labelInput.setAttribute('for', this.element.id);
+            labelInput.innerText = this.label;
+
+            div.append(labelInput, this.element, this.errorMessage);
             
-
-           
             this.element.addEventListener('input', (e) =>{
                 this.value = e.target.value;
-                console.log(this.value)
+                this.updateErrorMessage('');
                 if(onInput){
                 onInput(e);
                 };
@@ -48,20 +47,18 @@ export class Input {
                 this.element.addEventListener('change', (e) =>{
                     onChange(e);
                 });
-                
             }
-
-            div.append(label, this.element, this.errorMessage);
-            console.log(div)
+            
             return div
+        }
+
+        updateErrorMessage(message) {
+            this.errorMessage.innerText = message;
         }
         
 
     render(div){
-        console.log(div)
-
-        this.control.append(this.div)
-        
+        this.control.append(this.div) 
     }
     
 }

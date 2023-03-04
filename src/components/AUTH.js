@@ -1,6 +1,7 @@
 import { api } from "./API";
 import { Input } from './Input';
 import { Form } from './Form';
+import { taskBoard } from "../index";
 import {loginConfig, registerConfig} from './configInputs'
 
 const getLoginForm = (onSuccess) => 
@@ -9,9 +10,10 @@ const getLoginForm = (onSuccess) =>
     submitBtnText: 'Submit',
     title: 'LOGIN',
     onSubmit: async (data) => {
+        console.log(data)
         await api.login(data);
         onSuccess()
-    }
+    },
     })
 
 const getRegisterForm =(onSuccess) => 
@@ -20,9 +22,10 @@ const getRegisterForm =(onSuccess) =>
     submitBtnText: 'Submit',
     title: 'REGISTER',
     onSubmit: async (data) => {
+        console.log(data)
         await api.register(data);
         onSuccess()
-    }
+    },
 });
 
 
@@ -64,7 +67,8 @@ export class Auth {
 
         this.logoutBtn.addEventListener('click', () => {
             this.logout();
-            api.logout()
+            api.logout();
+            taskBoard.logout()
         });
 
     }

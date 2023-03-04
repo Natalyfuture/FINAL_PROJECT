@@ -1,13 +1,13 @@
 const loginConfig = [
     {
-        name: 'Email', 
+        name: 'email', 
         placeholder: 'Enter your Email',
         type: 'email',
         label: 'Email', 
 
     },
     {
-        name: 'Password', 
+        name: 'password', 
         placeholder: 'Enter your Password',
         type: 'password',
         label:  'Password',
@@ -18,27 +18,45 @@ const loginConfig = [
 
 const registerConfig = [
     {
-        name: 'Email', 
+        name: 'email', 
         placeholder: 'Enter your Email',
         type: 'email',
         label: 'Email', 
 
     },
     {
-        name: 'Password', 
+        name: 'name', 
+        placeholder: 'Enter your Name',
+        type: 'text',  
+        label:  'Name',
+
+    },
+    {
+        name: 'password', 
         placeholder: 'Enter your Password',
         type: 'password',
         label:  'Password',
 
     },
 
-    {
-        name: 'Name', 
-        placeholder: 'Enter your Name',
-        type: 'text',  
-        placeholder:  'Name',
-
-    }
 ]
 
-export {loginConfig, registerConfig}
+const taskBoardConfig = [
+    {
+        name: 'name', 
+        placeholder: 'Task name',
+        type: 'text',
+        label: 'Name', 
+
+    },
+    {
+        name: 'description', 
+        placeholder: 'Task description',
+        type: 'text',
+        label:  'Password',
+
+    }
+   
+]
+
+export {loginConfig, registerConfig, taskBoardConfig}

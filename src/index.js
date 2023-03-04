@@ -2,6 +2,7 @@
 import { Input } from './components/Input'
 import { Form } from './components/Form';
 import { Auth } from './components/AUTH';
+import { TaskBoard} from './components/TaskBoard'
 import { api} from './components/API';
 import './styles/style.css';
 
@@ -19,9 +20,17 @@ const auth = new Auth({
     onLoginSuccess,
 })
 
-const renderAppLayout = (user) => {
+export const taskBoard = new TaskBoard ({
+    appContainer
+})
+
+const renderAppLayout = async (user) => {
 auth.user = user;
 auth.renderHeaderControls();
+taskBoard.renderLayout();
+const taskList = await api.getAllTasks();
+
+taskList.forEach((task) => taskBoard.addTask(task))
 
 }
 
@@ -38,36 +47,9 @@ const init = async () => {
   
   init();
 
-/* const isLoggedIn = api.isLoggedIn();
-if(isLoggedIn) {
-    api.autoLogin()
-}else{} */
-/* const api = new API(); */
-  /*  api.login({
-    email: 'test5555@gmail.com',
-    password: 'asdfghj'
-}).then((res) => {
-    console.log(res)
-    api.getSelf()
-}).catch((err) => {
-    console.log('err', err)
-})  
- */
-/* api.register({
-    email: 'aaaaaaa101@gmail.com',
-    password: 'aaaaaaa10',
-    name: 'aaaaaaa10'
-}) *//* .then(() =>{ */
-   /*  api.login({
-    email: 'test5555@gmail.com',
-    password: 'asdfghj',
-    }).then((res) => {
-        console.log('res', res)
-        api.getSelf();
-    }).catch((err) => {
-        console.log('err', err)
-    }) */
-/* }) */
+
+
+
 
 
 

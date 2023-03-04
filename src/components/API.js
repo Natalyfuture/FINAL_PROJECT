@@ -2,7 +2,7 @@ export const TOKEN_KEY = 'token';
 
 class API {
     constructor() {
-        this.baseURL = 'https://byte-tasks.herokuapp.com/api-docs';
+        this.baseURL = 'https://byte-tasks.herokuapp.com/api';
         this.headers = {
             Authorization: null,
             'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ class API {
         const response = await fetch(`${this.baseURL}/auth/register`, {
             method: 'POST',
             headers: this.headers,
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
 
         this.handleErrors(response);
@@ -67,10 +67,54 @@ class API {
         return this.getSelf()
     }
 
+    async createTask(data) {
+        const res = await fetch(`${this.baseURL}/task`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: this.headers,
+        });
+        this.handleErrors(res);
+
+        return res.json();
+    }
+
+    async getAllTasks() {
+        const response = await fetch(`${this.baseURL}/task`, {
+          method: "GET",
+          headers: this.headers,
+        });
+    
+       this.handleErrors(response);
+        
+        return await response.json();
+      }
+
+    async editTask(id, data) {
+        const res = await fetch(`${this.baseURL}/task/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(data),
+            headers: this.headers,
+        });
+        this.handleErrors(res);
+
+        return res.json();
+    }
+
+    async deleteTask(id, data) {
+        const res = await fetch(`${this.baseURL}/task/${id}`, {
+            method: 'DELETE',
+            headers: this.headers,
+        });
+        this.handleErrors(res);
+
+        return res;
+    }
+
     logout() {
         localStorage.removeItem(TOKEN_KEY);
     }
 }
+
 
 
 
