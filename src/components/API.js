@@ -1,5 +1,13 @@
 export const TOKEN_KEY = 'token';
 
+class ApiError extends Error {
+    constructor({message, data, status}) {
+        super(message);
+        this.status = status;
+        this.data = data; 
+    }
+}
+
 class API {
     constructor() {
         this.baseURL = 'https://byte-tasks.herokuapp.com/api';
@@ -9,9 +17,15 @@ class API {
         };
     }
 
-    handleErrors({ok, url, status}) {
+    async handleErrors(response) {
+        const {ok, status, statusText} = response;
         if(!ok){
-            throw new Error(`Response on ${url} failed with status ${status}`)
+            /* throw new Error(`Response on ${url} failed with status ${status}`) */
+            throw new ApiError({
+                message: "Error!",
+                data: await response.json(),
+                status: status,
+            })
         }
     }
 
@@ -22,7 +36,7 @@ class API {
             body: JSON.stringify(data),
         });
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         const registeredUser = await response.json();
     
@@ -36,7 +50,7 @@ class API {
             body: JSON.stringify(data),
         })
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         const {token} = await response.json();
     
@@ -50,7 +64,7 @@ class API {
             method: 'GET',
             headers: this.headers,
         })
-        this.handleErrors(response)
+        await this.handleErrors(response)
 
         const user = await response.json()
         return user;
@@ -73,7 +87,7 @@ class API {
             body: JSON.stringify(data),
             headers: this.headers,
         });
-        this.handleErrors(res);
+        await this.handleErrors(res);
 
         return res.json();
     }
@@ -84,7 +98,7 @@ class API {
           headers: this.headers,
         });
     
-       this.handleErrors(response);
+       await this.handleErrors(response);
         
         return await response.json();
       }
@@ -95,7 +109,7 @@ class API {
             body: JSON.stringify(data),
             headers: this.headers,
         });
-        this.handleErrors(res);
+        await this.handleErrors(res);
 
         return res.json();
     }
@@ -105,7 +119,7 @@ class API {
             method: 'DELETE',
             headers: this.headers,
         });
-        this.handleErrors(res);
+        await this.handleErrors(res);
 
         return res;
     }

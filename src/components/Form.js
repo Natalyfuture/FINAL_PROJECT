@@ -44,7 +44,13 @@ export class Form {
                 try {
                     await onSubmit(formValues, e)
                 } catch (err) {
-                    console.log(err)
+                    console.log(err.data)
+                    err.data.details.forEach(({path, message}) =>{
+                        const erroredInput = this.inputs.find((input) => {
+                            return input.name === path[0];
+                        });
+                        erroredInput.updateErrorMessage(message)
+                    })
                 }
                 this.submitBtn.removeAttribute('disabled');
                     
