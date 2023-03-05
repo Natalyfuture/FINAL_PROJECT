@@ -53,7 +53,7 @@ const taskBoardConfig = [
         name: 'description', 
         placeholder: 'Task description',
         type: 'text',
-        label:  'Password',
+        label:  'Description',
 
     }
    

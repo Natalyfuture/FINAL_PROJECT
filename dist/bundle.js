@@ -194,7 +194,6 @@ const getLoginForm = (onSuccess) =>
     submitBtnText: 'Submit',
     title: 'LOGIN',
     onSubmit: async (data) => {
-        console.log(data)
         await _API__WEBPACK_IMPORTED_MODULE_0__.api.login(data);
         onSuccess()
     },
@@ -206,7 +205,6 @@ const getRegisterForm =(onSuccess) =>
     submitBtnText: 'Submit',
     title: 'REGISTER',
     onSubmit: async (data) => {
-        console.log(data)
         await _API__WEBPACK_IMPORTED_MODULE_0__.api.register(data);
         onSuccess()
     },
@@ -362,7 +360,6 @@ class Form {
                 try {
                     await onSubmit(formValues, e)
                 } catch (err) {
-                    console.log(err.data)
                     err.data.details.forEach(({path, message}) =>{
                         const erroredInput = this.inputs.find((input) => {
                             return input.name === path[0];
@@ -592,7 +589,8 @@ class Task {
         this.restartBtn.addEventListener('click', this.restartTracker);
         this.markAsDoneBtn.addEventListener('click', this.toggleTaskFinished);
       
-
+        console.log(this.isActive) 
+        console.log('Task5', this.isFinished)
         
     }
   
@@ -668,12 +666,16 @@ class Task {
         this.timeTrackedIntervalId = null;
     }
 
-    restartTracker = () =>{
+    restartTracker = async () =>{
         
         this.timeTracked = 0;
         this.updateTimeTracker()
-        this.isActive = !this.isActive;
-        this.isFinished = !this.isFinished;
+        this.isActive = false;
+        this.isFinished = false;
+
+        await _API__WEBPACK_IMPORTED_MODULE_0__.api.editTask(this.id, { isFinished: this.isFinished});
+        await _API__WEBPACK_IMPORTED_MODULE_0__.api.editTask(this.id, {isActive: this.isActive});
+        await _API__WEBPACK_IMPORTED_MODULE_0__.api.editTask(this.id, {timeTracked: this.timeTracked});
 
         this.markAsDoneBtn.classList.remove('disabled-btn') 
         this.markAsDoneBtn.classList.add('active-btn') 
@@ -684,8 +686,9 @@ class Task {
 
         this.timerBtn.classList.add('timer-btn-play');
         this.timerBtn.innerHTML = `<i class="fas fa-play"></i>`;
-        this.isActive = !this.isActive;
-
+         /* this.isActive = !this.isActive; */
+        console.log(this.isActive) 
+        console.log('Task5', this.isFinished)
     }
 
     updateTimeTracker(){
@@ -857,7 +860,7 @@ const taskBoardConfig = [
         name: 'description', 
         placeholder: 'Task description',
         type: 'text',
-        label:  'Password',
+        label:  'Description',
 
     }
    
@@ -895,7 +898,6 @@ __webpack_require__.r(__webpack_exports__);
 const appContainer = document.getElementById('app');
 
 const onLoginSuccess = async() => {
-    console.log('HELLO!')
     appContainer.innerHTML = '';
     const user = await _components_API__WEBPACK_IMPORTED_MODULE_4__.api.getSelf();
     renderAppLayout(user);

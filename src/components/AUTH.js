@@ -10,7 +10,6 @@ const getLoginForm = (onSuccess) =>
     submitBtnText: 'Submit',
     title: 'LOGIN',
     onSubmit: async (data) => {
-        console.log(data)
         await api.login(data);
         onSuccess()
     },
@@ -22,7 +21,6 @@ const getRegisterForm =(onSuccess) =>
     submitBtnText: 'Submit',
     title: 'REGISTER',
     onSubmit: async (data) => {
-        console.log(data)
         await api.register(data);
         onSuccess()
     },

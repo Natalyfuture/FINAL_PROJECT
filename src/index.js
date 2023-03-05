@@ -9,7 +9,6 @@ import './styles/style.css';
 const appContainer = document.getElementById('app');
 
 const onLoginSuccess = async() => {
-    console.log('HELLO!')
     appContainer.innerHTML = '';
     const user = await api.getSelf();
     renderAppLayout(user);

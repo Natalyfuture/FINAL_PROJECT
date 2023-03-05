@@ -98,7 +98,8 @@ export class Task {
         this.restartBtn.addEventListener('click', this.restartTracker);
         this.markAsDoneBtn.addEventListener('click', this.toggleTaskFinished);
       
-
+        console.log(this.isActive) 
+        console.log('Task5', this.isFinished)
         
     }
   
@@ -174,12 +175,16 @@ export class Task {
         this.timeTrackedIntervalId = null;
     }
 
-    restartTracker = () =>{
+    restartTracker = async () =>{
         
         this.timeTracked = 0;
         this.updateTimeTracker()
-        this.isActive = !this.isActive;
-        this.isFinished = !this.isFinished;
+        this.isActive = false;
+        this.isFinished = false;
+
+        await api.editTask(this.id, { isFinished: this.isFinished});
+        await api.editTask(this.id, {isActive: this.isActive});
+        await api.editTask(this.id, {timeTracked: this.timeTracked});
 
         this.markAsDoneBtn.classList.remove('disabled-btn') 
         this.markAsDoneBtn.classList.add('active-btn') 
@@ -190,8 +195,9 @@ export class Task {
 
         this.timerBtn.classList.add('timer-btn-play');
         this.timerBtn.innerHTML = `<i class="fas fa-play"></i>`;
-        this.isActive = !this.isActive;
-
+         /* this.isActive = !this.isActive; */
+        console.log(this.isActive) 
+        console.log('Task5', this.isFinished)
     }
 
     updateTimeTracker(){
