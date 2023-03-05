@@ -60,7 +60,7 @@ line-height: 36px;
 
 .auth-form {
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 600px;
     border: 1px solid gray;
     background-color: rgb(242, 242, 253);
     box-shadow: 2px 2px 5px 5px rgba(32, 50, 105, 0.2);
