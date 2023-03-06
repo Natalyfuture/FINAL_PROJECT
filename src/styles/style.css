@@ -261,6 +261,10 @@ display: none;
     cursor: pointer;
 }
 
+.task-delete-btn:hover{
+    background-color: gray;
+}
+
 .timer-btn {
     position: relative;
     border-radius: 100%;
